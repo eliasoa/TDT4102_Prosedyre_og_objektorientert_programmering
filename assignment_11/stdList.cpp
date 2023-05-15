@@ -1,7 +1,7 @@
 #include "stdList.h"
 
 std::ostream& operator<<(std::ostream& os, const Person& p){
-    os << p.getLastName() << ", " << p.firstName;
+    os << p.lastName << ", " << p.firstName;
     return os;
 }
 bool Person::operator <(const Person& p) const {

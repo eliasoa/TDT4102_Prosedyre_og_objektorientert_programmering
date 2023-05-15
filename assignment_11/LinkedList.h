@@ -33,7 +33,10 @@ public:
     Node* getPrev() const { return prev; }
 
     // write the value of the node to the ostream
-    friend std::ostream & operator<<(std::ostream & os, const Node & node);
+    friend std::ostream & operator<<(std::ostream & os, const Node & node){
+        os << node.getValue();
+        return os;
+    };
 
     friend class LinkedList;
 };

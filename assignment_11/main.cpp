@@ -6,7 +6,7 @@
 int main() {
 
     // problem1();
-    // listProgram();
+    listProgram();
    
     return 0;
 }
