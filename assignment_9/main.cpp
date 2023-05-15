@@ -3,6 +3,9 @@
 #include "Person.h"
 #include "Meeting.h"
 int main() {
+    //Denne testen er tatt fra LF, orket ikke skrive selv ;)
+    std::unique_ptr<Car> fullCar {new Car{0}};
+	std::unique_ptr<Car> car {new Car{5}};
 
     // std::unique_ptr<Car> fullCar{new Car{5}};
 
