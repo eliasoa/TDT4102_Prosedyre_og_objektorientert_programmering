@@ -1,14 +1,12 @@
 #include <iostream>
-#include <Iterators.h>
-#include <Person.h>
-
+#include "Iterators.h"
+#include "stdList.h"
 
 
 int main() {
 
     // problem1();
-
-    Person p1("Elias","Almenningen");
-    std::cout << p1;
+    // listProgram();
+   
     return 0;
 }
