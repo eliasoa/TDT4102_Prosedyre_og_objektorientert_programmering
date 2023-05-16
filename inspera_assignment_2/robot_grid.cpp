@@ -16,11 +16,13 @@
 void RobotGrid::draw_grid_lines()
 {
     // BEGIN: G1
-    //
-    // Write your answer to assignment G1 here, between the // BEGIN: G1
-    // and // END: G1 comments. You should remove any code that is
-    // already there and replace it with your own.
+    for(int i = x_pos; i <= x_pos + w_size; i = i + cell_width){
+      window.draw_line({i, y_pos}, {i, y_pos + h_size});
+    }
 
+    for (int i = y_pos; i <= y_pos + h_size; i = i + cell_height){
+      window.draw_line({x_pos, i}, {x_pos + w_size, i});
+    }
     // END: G1
 }
 
@@ -38,15 +40,8 @@ void RobotGrid::draw_grid_lines()
 Point RobotGrid::get_grid_cell_center_coord(int x, int y) const
 {
   // BEGIN: G2
-  //
-  // Write your answer to assignment G2 here, between the // BEGIN: G2
-  // and // END: G2 comments. You should remove any code that is
-  // already there and replace it with your own.
-
-  (void)x;
-  (void)y;
-  return {0, 0};
-
+  Point cellCentre{x+cell_width/2,y+cell_height/2};
+  return cellCentre;
   // END: G2
 }
 
@@ -70,14 +65,9 @@ void RobotGrid::make_robot(string name, Point pos, Color color)
   check_coord_empty(pos, name, false);
 
   // BEGIN: G3
-  //
-  // Write your answer to assignment G3 here, between the // BEGIN: G3
-  // and // END: G3 comments. You should remove any code that is
-  // already there and replace it with your own.
-
-  (void)name;
-  (void)color;
-
+  // robots.insert({name,make_unique<Robot>(name, pos, color)});
+  unique_ptr<Robot> r = make_unique<Robot>(name,pos,color);
+  robots.insert({name,move(r)});
   // END: G3
 }
 
@@ -94,11 +84,10 @@ void RobotGrid::make_robot(string name, Point pos, Color color)
 void RobotGrid::draw_robots()
 {
   // BEGIN: G4
-  //
-  // Write your answer to assignment G4 here, between the // BEGIN: G4
-  // and // END: G4 comments. You should remove any code that is
-  // already there and replace it with your own.
-
+  for (const auto& robot:robots){
+    window.draw_circle(get_grid_cell_center_coord(robot.second->pos),cell_width/2,robot.second->color);  
+    window.draw_text(get_grid_cell_edge_coord(robot.second->pos),robot.first);
+  }
   // END: G4
 }
 
@@ -116,10 +105,7 @@ void RobotGrid::delete_robot(string name)
   check_name_exists(name);
 
   // BEGIN: G5
-  //
-  // Write your answer to assignment G5 here, between the // BEGIN: G5
-  // and // END: G5 comments. You should remove any code that is
-  // already there and replace it with your own.
+  robots.erase(name);
 
   (void)name;
 
@@ -142,14 +128,13 @@ void RobotGrid::move_robot(string name, Point pos)
   check_coord_empty(pos, name, true);
 
   // BEGIN: G6
-  //
-  // Write your answer to assignment G6 here, between the // BEGIN: G6
-  // and // END: G6 comments. You should remove any code that is
-  // already there and replace it with your own.
-
-  (void)name;
-  (void)pos;
-
+  robots.at(name)->pos = pos;
+  // for (auto& robot:robots)
+  // {
+  //   if(robot.second->name == name){
+  //     robot.second->pos = pos;
+  //   }
+  // }
   // END: G6
 }
 
@@ -162,16 +147,8 @@ void RobotGrid::recolor_robot(string name, Color color)
   check_name_exists(name);
 
   // BEGIN: G7
-  //
-  // Write your answer to assignment G7 here, between the // BEGIN: G7
-  // and // END: G7 comments. You should remove any code that is
-  // already there and replace it with your own.
-
-  (void)name;
-  (void)color;
-
+  robots.at(name)->color = color;
   // END: G7
-
 }
 
 // Task G8: Clear the grid
@@ -181,10 +158,8 @@ void RobotGrid::recolor_robot(string name, Color color)
 void RobotGrid::clear_robots()
 {
   // BEGIN: G8
-  //
-  // Write your answer to assignment G8 here, between the // BEGIN: G8
-  // and // END: G8 comments. You should remove any code that is
-  // already there and replace it with your own.
+
+  robots.clear();
 
   // END: G8
 
@@ -208,9 +183,10 @@ void RobotGrid::rename_robot(string name, string new_name)
   // and // END: G9 comments. You should remove any code that is
   // already there and replace it with your own.
 
-  (void)name;
-  (void)new_name;
-
+  Point pos = robots.at(name)->pos;
+  Color col = robots.at(name)->color;
+  robots.erase(name);
+  make_robot(new_name,pos,col);
   // END: G9
 }
 
