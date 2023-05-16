@@ -13,14 +13,11 @@
 Color Interpreter::get_color(string color_name) 
 {
   // BEGIN: S1
-  //
-  // Write your answer to assignment S1 here, between the // BEGIN: S1
-  // and // END: S1 comments. You should remove any code that is
-  // already there and replace it with your own.
 
-  (void)color_name;
-  return Color::blue;
-
+  if (color_map.find(color_name) == color_map.end()){ 
+    throw invalid_argument("The color " + color_name + " does not exist :(");
+  }
+  return color_map.at(color_name);
   // END: S1
 }
 
@@ -55,17 +52,58 @@ void Interpreter::execute_instruction(istringstream instruction)
     grid.make_grid(rows, cols);
 
   } else if (instr == "make_robot") {
-    throw string("Instruction not implemented " + instr);
+    string name;
+    int x_pos;
+    int y_pos;
+    string color;
+    
+    instruction >> name;
+    instruction >> x_pos;
+    instruction >> y_pos;
+    instruction >> color;
+    grid.make_robot(name,{x_pos,y_pos},get_color(color));
+
+    // throw string("Instruction not implemented " + instr);
   } else if (instr == "clear_robots") {
-    throw string("Instruction not implemented " + instr);
+
+    grid.clear_robots();
+    // throw string("Instruction not implemented " + instr);
   } else if (instr == "move_robot") {
-    throw string("Instruction not implemented " + instr);
+    string name;
+    int x_pos;
+    int y_pos;
+
+    instruction >> name;
+    instruction >> x_pos;
+    instruction >> y_pos;
+
+    grid.move_robot(name,{x_pos,y_pos});
+    // throw string("Instruction not implemented " + instr);
   } else if (instr == "recolor_robot") {
-    throw string("Instruction not implemented " + instr);
+    string name;
+    string color;
+
+    instruction >> name;
+    instruction >> color;
+
+    grid.recolor_robot(name,get_color(color));
+    // throw string("Instruction not implemented " + instr);
   } else if (instr == "rename_robot") {
-    throw string("Instruction not implemented " + instr);
+    string name;
+    string new_name;
+
+    instruction >> name;
+    instruction >> new_name;
+
+    grid.rename_robot(name, new_name);
+    // throw string("Instruction not implemented " + instr);
   } else if (instr == "delete_robot") {
-    throw string("Instruction not implemented " + instr);
+    string name;
+
+    instruction >> name;
+
+    grid.delete_robot(name);
+    // throw string("Instruction not implemented " + instr);
   } else {
     // Don't change this
     throw string("Invalid command " + instr);

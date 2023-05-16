@@ -40,7 +40,7 @@ void RobotGrid::draw_grid_lines()
 Point RobotGrid::get_grid_cell_center_coord(int x, int y) const
 {
   // BEGIN: G2
-  Point cellCentre{x+cell_width/2,y+cell_height/2};
+  Point cellCentre{x_pos + x*cell_width +cell_width/2,y_pos + y*cell_height + cell_height/2};
   return cellCentre;
   // END: G2
 }

@@ -134,15 +134,15 @@ Application::Application()
     window.add(out_execution_trace);
     
     in_program.setText("make_grid     6     6\n"
-                    // "make_robot    bob   2      2 green\n"
-                    // "make_robot    alice 4      4 blue\n"
-                    // "move_robot    bob   2      3\n"
-                    // "move_robot    alice 4      5\n"
-                    // "recolor_robot alice yellow\n"
-                    // "rename_robot  bob   roy\n"
-                    // "move_robot    roy 5      5\n"
-                    // "delete_robot  roy\n"
-                    // "delete_robot  alice\n"
+                    "make_robot    bob   2      2 green\n"
+                    "make_robot    alice 4      4 blue\n"
+                    "move_robot    bob   2      3\n"
+                    "move_robot    alice 4      5\n"
+                    "recolor_robot alice yellow\n"
+                    "rename_robot  bob   roy\n"
+                    "move_robot    roy 5      5\n"
+                    "delete_robot  roy\n"
+                    "delete_robot  alice\n"
                     );
 
 	btn_run_program.setCallback(std::bind(&Application::cb_btn_run_program,this));
