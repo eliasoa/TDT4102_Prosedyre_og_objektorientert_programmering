@@ -85,7 +85,7 @@ void RobotGrid::draw_robots()
 {
   // BEGIN: G4
   for (const auto& robot:robots){
-    window.draw_circle(get_grid_cell_center_coord(robot.second->pos),cell_width/2,robot.second->color);  
+    window.draw_circle(get_grid_cell_center_coord(robot.second->pos),min(cell_width/2,cell_height/2),robot.second->color);  
     window.draw_text(get_grid_cell_edge_coord(robot.second->pos),robot.first);
   }
   // END: G4
@@ -200,12 +200,12 @@ void RobotGrid::rename_robot(string name, string new_name)
 void RobotGrid::check_coord_bounds(Point p) const
 {
   // BEGIN: G10
-  //
-  // Write your answer to assignment G10 here, between the // BEGIN: G10
-  // and // END: G10 comments. You should remove any code that is
-  // already there and replace it with your own.
-
-  (void)p;
+  if (p.x < 0 || p.x >= cols)
+  {
+    throw invalid_argument("x cord are out of bound");
+  }else if(p.y < 0 || p.y >= rows){
+    throw invalid_argument("y cord are out of bound");
+  }
 
   // END: G10
 
@@ -221,13 +221,11 @@ void RobotGrid::check_coord_bounds(Point p) const
 void RobotGrid::check_name_available(string name) const
 {
   // BEGIN: G11
-  //
-  // Write your answer to assignment G11 here, between the // BEGIN: G11
-  // and // END: G11 comments. You should remove any code that is
-  // already there and replace it with your own.
-
-  (void)name;
-
+  if (robots.find(name) != robots.end())
+  {
+    throw invalid_argument("Robot name is not avaliable");
+  }
+  
   // END: G11
 }
 
@@ -241,13 +239,11 @@ void RobotGrid::check_name_available(string name) const
 void RobotGrid::check_name_exists(string name) const
 {
   // BEGIN: G12
-  //
-  // Write your answer to assignment G12 here, between the // BEGIN: G12
-  // and // END: G12 comments. You should remove any code that is
-  // already there and replace it with your own.
 
-  (void)name;
-
+  if (robots.find(name) == robots.end())
+  {
+    throw invalid_argument("Robot does not exist!");
+  }
   // END: G12
 
 }
@@ -281,10 +277,8 @@ void RobotGrid::check_name_exists(string name) const
 void RobotGrid::check_coord_empty(Point p, string name, bool is_moving) const
 {
   // BEGIN: G13
-  //
-  // Write your answer to assignment G13 here, between the // BEGIN: G13
-  // and // END: G13 comments. You should remove any code that is
-  // already there and replace it with your own.
+
+  
 
   (void)p;
   (void)name;
