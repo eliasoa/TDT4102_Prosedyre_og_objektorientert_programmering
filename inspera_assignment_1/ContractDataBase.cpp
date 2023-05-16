@@ -86,7 +86,8 @@ void ContractDataBase::saveContracts(string filename)
         int id = contract.getId();
         string text = contract.getInsuranceText();
         
-        oss << name << "," << insType << "," <<  + value << "," << id << "," << text << "\n";     
+        oss << name << "," << insType << "," <<  + value << "," << id << "," << text << "\n";
+        oss.close();     
     }
 
     // END: 1e

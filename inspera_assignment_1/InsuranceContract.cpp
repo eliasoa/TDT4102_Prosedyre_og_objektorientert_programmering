@@ -7,10 +7,10 @@ InsuranceContract::InsuranceContract(string holderName, InsuranceType insType, i
     if (insuranceText == "Text missing!")
     {
         // BEGIN: 2c2
-
-        // Write your answer to assignment 2c2 here, between the // BEGIN: 2c2
-        // and // END: 2c2 comments. Remove the code that is already there.
-
+        insuranceText = "";
+        for (int i = 0; i < 10; i++) {
+            insuranceText += svadaGenerator(loadSvada());
+        }
         // END: 2c2
     }
 }

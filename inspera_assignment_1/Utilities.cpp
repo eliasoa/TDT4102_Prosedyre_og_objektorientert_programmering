@@ -21,11 +21,29 @@ string toGreek(string sentence)
 vector<vector<string>> loadSvada()
 {
     // BEGIN: 2b
+    
+    vector<string> svada;
+    vector<vector<string>> sortedSvada;
 
-    // Write your answer to assignment 2b here, between the // BEGIN: 2b
-    // and // END: 2b comments. Remove the code that is already there.
-
-    return vector<vector<string>>{};
+    string filename = "SvadaWords.txt";
+    ifstream ifs(filename);
+    if (!ifs){
+        error("Couldn't open file: ", filename);
+    }
+    string line;
+    while (getline(ifs, line)){
+        if (line == "||"){
+            sortedSvada.push_back(svada);
+            svada.clear();
+        }
+        else{
+            svada.push_back(line);
+        }
+    }
+    sortedSvada.push_back(svada);
+    ifs.close();
+    
+    return sortedSvada;
 
     // END: 2b
 }
@@ -33,12 +51,12 @@ vector<vector<string>> loadSvada()
 string svadaGenerator(vector<vector<string>> svadaVec)
 {
     // BEGIN: 2c1
-
-    // Write your answer to assignment 2c1 here, between the // BEGIN: 2c1
-    // and // END: 2c1 comments. Remove the code that is already there.
-
-    (void)svadaVec;
-    return "";
+    string text;
     
+    for (auto svadaGroup:svadaVec){
+        int randNum {rand() % static_cast<int>(svadaGroup.size())};
+        text += svadaGroup.at(randNum) + " ";
+    }
+    return text;
     // END: 2c1
 }

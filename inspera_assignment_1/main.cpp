@@ -12,10 +12,12 @@ int main()
 	db.loadContracts("DataBase.txt");
 	InsuranceContract contract{"Jonas Lie", InsuranceType::Car, 1000, 1242, ""};
 	//You can test your code under here
+	db.addContract("John Carew", InsuranceType::Car, 1000);
 
-	// std::cout << db.addContract("Nils Nilsen",InsuranceType::Car, 1000);
-	// db.saveContracts("jeff.txt");
-	string tooGreek = toGreek("Hei paa deg");
+	for (const auto& contract : db.getDataBase()) {
+		cout << contract << endl;
+	}
+	
 
 	return 0;
 }
