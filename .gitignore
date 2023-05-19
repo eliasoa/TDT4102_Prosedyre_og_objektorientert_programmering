@@ -44,4 +44,4 @@
 *.vscode
 *.builddir
 *.subprojects
-eksamensoving
+*eksamensoving/
