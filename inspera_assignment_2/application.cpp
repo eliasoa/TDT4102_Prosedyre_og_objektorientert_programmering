@@ -14,15 +14,16 @@
 // appropriately.
 string Application::load_program(string file_name)
 {
-  // BEGIN: A1
-  //
-  // Write your answer to assignment A1 here, between the // BEGIN: A1
-  // and // END: A1 comments. You should remove any code that is
-  // already there and replace it with your own.
+    // BEGIN: A2
+    ifstream ist{file_name};
+    if(!ist) error("Cannot open input file " + file_name);
 
-  (void)file_name;
-  return "";
-
+    string line;
+    string programString;
+    while (getline(ist,line)){
+        programString += line + "\n";
+    }
+    return programString;
   // END: A1
 }
 
@@ -37,14 +38,10 @@ string Application::load_program(string file_name)
 void Application::save_program(string file_name, string contents)
 {
   // BEGIN: A2
-  //
-  // Write your answer to assignment A2 here, between the // BEGIN: A2
-  // and // END: A2 comments. You should remove any code that is
-  // already there and replace it with your own.
+  ofstream ost{file_name};
+  if(!ost)error("Could not open file named " + file_name);
 
-  (void)file_name;
-  (void)contents;
-
+  ost << contents;
   // END: A2
 }
 
@@ -55,17 +52,14 @@ void Application::save_program(string file_name, string contents)
 // to an integer and false otherwise.
 bool Application::is_int(const string& s)
 {
+    // fra LF
   // BEGIN: A3
-  //
-  // Write your answer to assignment A3 here, between the // BEGIN: A3
-  // and // END: A3 comments. You should remove any code that is
-  // already there and replace it with your own.
-
-  (void)s;
-  return false;
-
+    // auto it = s.begin();
+    // while (it != s.end() && std::isdigit(*it)) ++it;
+    // return !s.empty() && it == s.end();
+    return !s.empty() && std::find_if(s.begin(), 
+        s.end(), [](unsigned char c) { return !std::isdigit(c); }) == s.end();
   // END: A3
-
 }
 
 // |

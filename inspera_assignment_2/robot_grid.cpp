@@ -278,11 +278,24 @@ void RobotGrid::check_coord_empty(Point p, string name, bool is_moving) const
 {
   // BEGIN: G13
 
+  // 1. sjekk om det er en robot i grid
+  // 2. sjekk om det er samme robot som skal flytte på seg med is_moving
+  //  flytt roboten
+  // 3. sjekk om de er en annen robot
+  //  throw exception
   
 
-  (void)p;
-  (void)name;
-  (void)is_moving;
+  
+  
+  for(const auto& robot:robots){
+    if((robot.second->pos.x == p.x) && (robot.second->pos.y == p.y)){ //if there is a robot in p
+      if((name != robot.first) || !is_moving){ //all good
+        throw invalid_argument("The robot " + name + " cannot be moved to position since there alredy is another robot there!");
+      }
+    }
+  }
+  
+
   
   // END: G13
 
