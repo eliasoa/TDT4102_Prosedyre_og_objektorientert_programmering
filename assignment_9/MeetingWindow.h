@@ -19,19 +19,13 @@ private:
 
 	std::vector<std::shared_ptr<Person>> people;
 
-	TDT4102::Button quitBtn;
+	TDT4102::Button quitBtn;	
 	TDT4102::TextInput personName;
 	TDT4102::TextInput personEmail;
 	TDT4102::Button personNewBtn;
-
-    
 public:
 	MeetingWindow(int x, int y, int width, int height, const std::string& title);
-
 	void cb_quit();
-
 	void newPerson();
-
 	void printPersons();
-	
 };

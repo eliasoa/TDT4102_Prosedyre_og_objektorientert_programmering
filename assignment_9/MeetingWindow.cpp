@@ -27,13 +27,14 @@ void MeetingWindow::cb_quit(){
 }
 
 void MeetingWindow::newPerson(){
-    std::string name = personName.getText();
-    std::string email = personEmail.getText();
     
-    personName.setText("");
-    personEmail.setText("");    
-    
-    people.emplace_back(new Person{name, email});
+	const std::string& name = personName.getText();
+	const std::string& email = personEmail.getText();
+
+	people.emplace_back(new Person{ name, email});
+
+    personName.setText("Name");
+	personEmail.setText("Email");
 }
 
 void MeetingWindow::printPersons(){
